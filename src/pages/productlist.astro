@@ -1,0 +1,17 @@
+---
+// @ts-nocheck
+import "../styles/global.css";
+import Card from "../components/Card.astro";
+const fashionUrl = "https://kea-alt-del.dk/t7/api/products/";
+const data = await fetch(fashionUrl).then((res) => res.json());
+console.log(data);
+---
+
+<h1>Produktlist</h1>
+
+<main>
+  <h2>Apparel</h2>
+  <div class="produktliste">
+    {data.map((product) => <Card {product} />)}
+  </div>
+</main>

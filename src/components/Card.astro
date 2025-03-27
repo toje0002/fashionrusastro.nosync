@@ -1,0 +1,34 @@
+---
+//@ts-nocheck
+import "../styles/global.css";
+const { product } = Astro.props;
+---
+
+<article class={`produkt ${product.discount ? "rabat" : ""}`}>
+  <div class="billede-container">
+    <img
+      src={`https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp`}
+      alt={product.productdisplayname}
+    />
+    <img
+      class={`udsolgtbillede ${product.soldout ? "udsolgt" : ""}`}
+      src="/src/assets/udsolgt.webp"
+      alt="Sold out"
+    />
+  </div>
+
+  <h3>{product.productdisplayname}</h3>
+  <p class="pris">
+    <span>Previously</span>
+    DKK {product.price},-
+  </p>
+  <div class="discount">
+    <p>
+      Now DKK {
+        Math.round(product.price - (product.price / 100) * product.discount)
+      },-
+    </p>
+    <p>{product.discount}%</p>
+  </div>
+  <a href={`product.html?id=${product.id}`}>Read more</a>
+</article>
